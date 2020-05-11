@@ -1,0 +1,59 @@
+const prefix = "?";
+const helpEmbed = new Discord.MessageEmbed()
+	.setColor('#0099ff')
+	.setTitle('Commands')
+	.setDescription('All of the current commands for Barney')
+	.addFields(
+		{ name: 'Main Commands', value: '?ping - Test Command' },
+	)
+    .setTimestamp()
+    
+    client.on("ready", () => {
+        client.user.setActivity("Use ?help")
+      });
+
+client.once('ready', () => {
+    console.log('Ready!');
+});
+
+client.on('message', (message) => {
+    if (!message.content.startsWith(prefix)) return;
+
+    if (message.content.startsWith(prefix + 'help')) {
+        message.channel.send(helpEmbed)
+    }
+})
+
+    if (message.content.startsWith("?kick")) {
+        // Easy way to get member object though mentions.
+        var member= message.mentions.members.first();
+        // Kick
+        member.kick().then((member) => {
+            // Successmessage
+            message.channel.send(":wave: " + member.displayName + " has been successfully kicked :point_right: ");
+        }).catch(() => {
+             // Failmessage
+            message.channel.send("Access Denied");
+        });
+    }
+
+
+
+
+
+    module.exports.run = async (client, message, args) => {
+    if (message.content.startsWith("?kick")) {
+        // Easy way to get member object though mentions.
+        if (message.member.hasPermission(['KICK_MEMBERS', 'ADMINISTRATOR'])); {
+
+        var member= message.mentions.members.first();
+            member.kick().then((member) => {
+                // Successmessage
+                message.channel.send(":wave: " + member.displayName + "  has been successfully kicked");
+            }).catch(() => {
+                 // Failmessage
+                message.channel.send("Failed to kick Member");
+            });
+        }
+    }
+    }
